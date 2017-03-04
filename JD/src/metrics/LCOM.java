@@ -1,8 +1,6 @@
 package metrics;
 
-import java.util.Scanner;
 import java.util.HashMap;
-import com.fhgh;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
