@@ -2,6 +2,7 @@ package view;
 
 import java.lang.reflect.InvocationTargetException;
 
+import metrics.CIS;
 import metrics.LCOM;
 import metrics.NOM;
 
@@ -108,12 +109,19 @@ public class MetricsAction  implements IObjectActionDelegate {
 							new ASTReader(selectedProject, monitor);
 						}
 						SystemObject system = ASTReader.getSystemObject();
+						
+						//objects initialization for metrics classes
 						LCOM lcom = new LCOM(system);
 						NOM nom = new NOM(system);
+						CIS cis = new CIS(system);
+						
+						//metrics
 						System.out.println("*******************LCOM********************");
-						System.out.print(lcom.toString());
+						System.out.print(lcom.toString()+"\n\n");
 						System.out.println("*******************NOM********************");
-						System.out.print(nom.toString());
+						System.out.print(nom.toString()+"\n\n");
+						System.out.println("*******************CIS********************");
+						System.out.print(cis.toString()+"\n\n");
 						
 						if(selectedPackageFragmentRoot != null) {
 							// package fragment root selected
