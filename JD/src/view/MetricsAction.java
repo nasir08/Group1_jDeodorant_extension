@@ -6,6 +6,7 @@ import metrics.CIS;
 import metrics.LCOM;
 import metrics.NOM;
 import metrics.RFC;
+import metrics.WMC;
 
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.jdt.core.ICompilationUnit;
@@ -116,6 +117,7 @@ public class MetricsAction  implements IObjectActionDelegate {
 						NOM nom = new NOM(system);
 						CIS cis = new CIS(system);
 						RFC rfc = new RFC(system);
+						WMC wmc = new WMC(system);
 						
 						//metrics
 						System.out.println("*******************LCOM********************");
@@ -126,6 +128,8 @@ public class MetricsAction  implements IObjectActionDelegate {
 						System.out.print(cis.toString()+"\n\n");
 						System.out.println("*******************RFC********************");
 						System.out.print(rfc.toString()+"\n\n");
+						System.out.println("*******************WMC********************");
+						System.out.print(wmc.toString()+"\n\n");
 						
 						if(selectedPackageFragmentRoot != null) {
 							// package fragment root selected

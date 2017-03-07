@@ -45,7 +45,7 @@ public class RFC
 		{
 			 M.add(methods.get(i).getClassName()+"."+methods.get(i).getSignature()); //methods in the current class
 			 
-			 java.util.List<MethodInvocationObject> methodInvocations = methods.get(i).getMethodInvocations();
+			 List<MethodInvocationObject> methodInvocations = methods.get(i).getMethodInvocations();
 			 
 			 for(int j=0; j<methodInvocations.size(); j++)
 			 {
