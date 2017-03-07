@@ -1,10 +1,8 @@
 package metrics;
 
-import java.awt.List;
-import java.util.ArrayList;
+import java.util.List;
 import java.util.HashMap;
 import java.util.HashSet;
-import java.util.Iterator;
 import java.util.Map;
 import java.util.Set;
 
@@ -16,14 +14,14 @@ import ast.SystemObject;
 public class RFC 
 {
 	
-	private Map<String, Integer> classMap = new HashMap<String, Integer>();
-	private Set<String> M;
-	private Set<String> R;
-	private Set<String> RS;
+	private Map<String, Integer> classMap;
+	public Set<String> M;
+	public Set<String> R;
 	private int RFC;
 	
 	public RFC(SystemObject system)
 	{
+		classMap = new HashMap<String, Integer>();
 		Set<ClassObject> classes = system.getClassObjects();
 		int rfcValue;
 		for(ClassObject classObject : classes)
@@ -37,12 +35,11 @@ public class RFC
 	{
 		M = new HashSet<String>();
 		R = new HashSet<String>();
-		RS = new HashSet<String>();
 		RFC = 0;
 		
-		java.util.List<String> classesNames = system.getClassNames();
+		List<String> classesNames = system.getClassNames();
 		
-		java.util.List<MethodObject> methods = classObject.getMethodList();
+		List<MethodObject> methods = classObject.getMethodList();
 		
 		for(int i=0; i<methods.size(); i++)
 		{
@@ -64,14 +61,10 @@ public class RFC
 		return RFC;
 	}
 	
-	private int unionOfSets(Set set1, Set set2)
+	private int unionOfSets(Set<String> set1, Set<String> set2)
 	{
-		Iterator<String> itr = set1.iterator();
-		while(itr.hasNext())
-		{
-			set2.add(itr);
-		}
-		return set2.size();
+		set1.addAll(set2);
+		return set1.size();
 		
 	}
 	

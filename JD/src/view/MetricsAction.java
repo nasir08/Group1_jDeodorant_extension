@@ -126,7 +126,6 @@ public class MetricsAction  implements IObjectActionDelegate {
 						System.out.print(cis.toString()+"\n\n");
 						System.out.println("*******************RFC********************");
 						System.out.print(rfc.toString()+"\n\n");
-						System.out.println("*******************RFCh********************");
 						
 						if(selectedPackageFragmentRoot != null) {
 							// package fragment root selected
