@@ -5,6 +5,7 @@ import java.lang.reflect.InvocationTargetException;
 import metrics.CIS;
 import metrics.LCOM;
 import metrics.NOM;
+import metrics.RFC;
 
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.jdt.core.ICompilationUnit;
@@ -114,6 +115,7 @@ public class MetricsAction  implements IObjectActionDelegate {
 						LCOM lcom = new LCOM(system);
 						NOM nom = new NOM(system);
 						CIS cis = new CIS(system);
+						RFC rfc = new RFC(system);
 						
 						//metrics
 						System.out.println("*******************LCOM********************");
@@ -122,6 +124,8 @@ public class MetricsAction  implements IObjectActionDelegate {
 						System.out.print(nom.toString()+"\n\n");
 						System.out.println("*******************CIS********************");
 						System.out.print(cis.toString()+"\n\n");
+						System.out.println("*******************RFC********************");
+						System.out.print(rfc.toString()+"\n\n");
 						
 						if(selectedPackageFragmentRoot != null) {
 							// package fragment root selected

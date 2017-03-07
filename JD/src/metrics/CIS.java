@@ -1,14 +1,11 @@
 package metrics;
 
-import java.awt.List;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 
-import ast.Access;
 import ast.ClassObject;
-import ast.ConstructorObject;
 import ast.SystemObject;
 import ast.MethodObject;
 
