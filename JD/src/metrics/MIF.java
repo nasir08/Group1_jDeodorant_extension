@@ -45,12 +45,11 @@ public class MIF {
 			declaredClass = declaredClass + cobj.getMethodList().size();
 					
 		}
-		System.out.println("Total number of inherited methods :"+InheritedClass);
-		System.out.println("Total number of declared methods :"+declaredClass);
+		
 		int tavailmeth = InheritedClass + declaredClass; // This is the total available methods of a class 
 		MIFactor = (double) InheritedClass / tavailmeth;
 		
-		System.out.println("Final value of MIF :"+ MIFactor);
+
 	}
 	@Override
 	public String toString() {
