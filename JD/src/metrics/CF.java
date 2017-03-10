@@ -8,7 +8,7 @@ import ast.ClassObject;
 import ast.SystemObject;
 
 public class CF {
-	double TC,nume; // TC= total numbers of classes in the system , nume= numerator value
+	double TC,num; // TC= total numbers of classes in the system ,num = numerator value
 	double CFValue; // Coupling Factor Value
 	String totalCFStr; 
 	Set<String> CompletedClasses = new HashSet<String>(); // Classes that are already visited
@@ -35,7 +35,7 @@ public class CF {
 					if(cObj2.equals(cObj1) || cObj2.isFriend(cObj1.getName())||
 							cObj1.equals(cObj2) || cObj1.isFriend(cObj2.getName()))
 					{
-						nume++;
+						num++;
 					}
 						
 				}
@@ -43,7 +43,7 @@ public class CF {
 		}
 		
 		CFValue=nume/((TC*TC)-TC); 
-		totalCFStr=nume+"/"+((TC*TC)-TC);
+		totalCFStr=num+"/"+((TC*TC)-TC);
 	}
 
 	public double getCF(){
