@@ -1,7 +1,7 @@
 # jdeodorant_extension
 Extension of jDeodorant plug-in to compute software quality metrics
 
-Metrics included:
+# Metrics included:
 1. Coupling Between Objects
 2. Coupling Factor
 3. Method Inheritance Factor
@@ -13,7 +13,7 @@ Metrics included:
 9. Number of Children
 10. Class Inerface Ssize
 
-To run the metrics on a java project in Eclipse
+# To run the metrics on a java project in Eclipse
 1. Download/Clone the repository
 2. Import into Eclipse
 3. Run the jDeodorant As Eclipse Application
