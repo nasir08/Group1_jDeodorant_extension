@@ -42,7 +42,7 @@ public class CF {
 			}
 		}
 		
-		CFValue=nume/((TC*TC)-TC); 
+		CFValue=num/((TC*TC)-TC); 
 		totalCFStr=num+"/"+((TC*TC)-TC);
 	}
 
