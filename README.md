@@ -2,7 +2,7 @@
 Extension of jDeodorant plug-in to compute software quality metrics
 
 # Metrics included:
-1. Coupling Between Objects
+1. Coupling Between Objects  
 2. Coupling Factor
 3. Method Inheritance Factor
 4. Attribute Inheritance Factor
