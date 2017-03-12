@@ -134,7 +134,8 @@ public class MetricsAction  implements IObjectActionDelegate {
 						CF cf = new CF(system);
 						AIF aif = new AIF(system);
 						
-						File file = new File("C:\\Users\\nasir\\Desktop\\metrics.txt");
+						String fileName = "metrics.txt";
+						File file = new File("C:\\Users\\nasir\\Desktop\\"+fileName);
 						try {
 							file.createNewFile();
 							System.out.print(file.getAbsolutePath());
