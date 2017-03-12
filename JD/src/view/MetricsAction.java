@@ -4,6 +4,7 @@ import java.lang.reflect.InvocationTargetException;
 
 import metrics.CIS;
 import metrics.LCOM;
+import metrics.MIF;
 import metrics.NOM;
 import metrics.RFC;
 import metrics.WMC;
@@ -118,6 +119,7 @@ public class MetricsAction  implements IObjectActionDelegate {
 						CIS cis = new CIS(system);
 						RFC rfc = new RFC(system);
 						WMC wmc = new WMC(system);
+						MIF mif = new MIF(system);
 						
 						//metrics
 						System.out.println("*******************LCOM********************");
@@ -130,6 +132,8 @@ public class MetricsAction  implements IObjectActionDelegate {
 						System.out.print(rfc.toString()+"\n\n");
 						System.out.println("*******************WMC********************");
 						System.out.print(wmc.toString()+"\n\n");
+						System.out.println("*******************MIF********************");
+						System.out.print(mif.toString()+"\n\n");
 						
 						if(selectedPackageFragmentRoot != null) {
 							// package fragment root selected
