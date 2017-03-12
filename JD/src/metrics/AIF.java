@@ -26,11 +26,11 @@ public class AIF {
 			if(!classObject.isInterface())
 			{
 				aifValue = computeAIF(system, classObject);
-				classMap.put("", aifValue);
+				classMap.put(classObject.getName(), aifValue);
 			}
 			else
 			{
-				classMap.put("", 0.0f);
+				classMap.put(classObject.getName(), 0.0f);
 			}
 		}
 	}

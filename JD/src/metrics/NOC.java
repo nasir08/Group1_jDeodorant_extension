@@ -18,7 +18,7 @@ public class NOC {
 		for (ClassObject classObject : classes) {
 			int computeDit = computeNOC(system, classObject);
 
-			classMap.put("", computeDit);
+			classMap.put(classObject.getName(), computeDit);
 		}
 
 	}

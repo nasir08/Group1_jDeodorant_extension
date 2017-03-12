@@ -16,7 +16,7 @@ public class DIT {
 		for (ClassObject classObject : classes) {
 			int computeDit = computeDIT(system, classObject);
 
-			classMap.put("", computeDit);
+			classMap.put(classObject.getName(), computeDit);
 		}
 	}
 

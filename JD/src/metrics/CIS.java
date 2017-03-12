@@ -28,7 +28,7 @@ public class CIS
 				if(m.getAccess().toString().equals("public")) //check if access modifier is public, if yes increment by 1
 				num+=1;
 			}
-			classMap.put("", num);
+			classMap.put(classObject.getName(), num);
 		}
 	}
 	

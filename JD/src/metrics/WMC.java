@@ -22,7 +22,7 @@ public class WMC {
 		for(ClassObject classObject : classes)
 		{
 			wmcValue = computeWMC(classObject);
-			classMap.put("", wmcValue);
+			classMap.put(classObject.getName(), wmcValue);
 		}
 	}
 

@@ -26,11 +26,11 @@ public class MIF {
 			if(!classObject.isInterface())
 			{
 				mifValue = computeMIF(system, classObject);
-				classMap.put("", mifValue);
+				classMap.put(classObject.getName(), mifValue);
 			}
 			else
 			{
-				classMap.put("", 0.0f);
+				classMap.put(classObject.getName(), 0.0f);
 			}
 		}
 	}

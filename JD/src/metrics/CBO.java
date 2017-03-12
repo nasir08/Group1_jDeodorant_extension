@@ -31,7 +31,7 @@ public class CBO {
 			
 			int cboValue = exportCoupling + inheritanceCoupling + importCoupling;
 		
-			cboMap.put("", cboValue);
+			cboMap.put(classObj.getName(), cboValue);
 		}
 	}
 	
