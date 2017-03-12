@@ -16,7 +16,7 @@ Extension of jDeodorant plug-in to compute software quality metrics
 # To run the metrics on a java project in Eclipse
     1. Download/Clone the repository
     2. Import into Eclipse
-    3. views.MetricsAction.java - on line 138, change the file path to a path in your computer
+    3. open views.MetricsAction.java - on line 138, change the file path to a path in your computer
     4. Run the jDeodorant As Eclipse Application
         This will open a new instance of Eclipse with jDeodorant running in it
     5. The project you wish to run the metrics on must be imported into the new instance of eclipse
