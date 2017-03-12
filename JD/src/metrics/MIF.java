@@ -1,10 +1,10 @@
 package metrics;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
-import java.util.HashSet;
-import java.util.LinkedList;
 import java.util.List;
-import java.util.ListIterator;
+import java.util.Map;
 import java.util.Set;
 
 import ast.Access;
@@ -12,67 +12,111 @@ import ast.ClassObject;
 import ast.MethodObject;
 import ast.SystemObject;
 import ast.TypeObject;
-import ast.ProjectUtils;
 
 
 public class MIF {
-
-	HashMap<String,LinkedList<String>> MIFMap;
-	private static int InheritedClass = 0; // Total Numbers of Methods Inherited from Super Class
-	private static int declaredClass = 0; // Total Numbers of Methods Declared in the class
-	static double MIFactor; // Final Method Inheritance Factor
-	public  MIF(SystemObject system) {
-		ListIterator<ClassObject> iterate1 = system.getClassListIterator();
-		while(iterate1.hasNext())
+	private Map<String, Float> classMap;
+	
+	public MIF(SystemObject system)
+	{
+		Set<ClassObject> classes = system.getClassObjects();
+		classMap = new HashMap<String, Float>();
+		float wmcValue = 0.0f;
+		for(ClassObject classObject : classes)
 		{
-			ClassObject cobj = iterate1.next();
-			if(cobj.isInterface())
+			if(!classObject.isInterface())
 			{
-				continue;
+				wmcValue = computeMIF(system, classObject);
+				classMap.put(classObject.getName(), wmcValue);
 			}
-			// Get inherited methods of the class
-			Set<MethodObject> inmethobj = GetAllInheritedMeth(system, cobj);
-			List<MethodObject> listclassmeth = cobj.getMethodList(); // List of Present Methods in a Class
-			for (MethodObject presentClassMethod : listclassmeth) {
-				if (presentClassMethod.overridesMethod()) {
-					inmethobj.remove(presentClassMethod);
-				}
+			else
+			{
+				classMap.put(classObject.getName(), 0.0f);
 			}
-			// Count the total number of methods in a class
-			InheritedClass = InheritedClass + inmethobj.size();
-						
-			// Count the total number of methods declared in a class
-			declaredClass = declaredClass + cobj.getMethodList().size();
-					
 		}
-		System.out.println("Total number of inherited methods :"+InheritedClass);
-		System.out.println("Total number of declared methods :"+declaredClass);
-		int tavailmeth = InheritedClass + declaredClass; // This is the total available methods of a class 
-		MIFactor = (double) InheritedClass / tavailmeth;
-		
-		System.out.println("Final value of MIF :"+ MIFactor);
 	}
-	@Override
-	public String toString() {
-		return MIFactor+"";
-	}
-	public Set<MethodObject> GetAllInheritedMeth(SystemObject system, ClassObject classObject) {
-		Set<MethodObject> inherdMeth = new HashSet<MethodObject>();
-		Set<String> classesInPackage = ProjectUtils.packageDetails.get(ProjectUtils.extractPackageNameFromWholeClassName(classObject.getName()));
-		TypeObject superClass = classObject.getSuperclass();
-		while (superClass != null && system.getClassObject(superClass.getClassType())!=null) {
 
-			ClassObject superClassObject = system.getClassObject(superClass.getClassType());
-			List<MethodObject> superClassMethods = superClassObject.getMethodList();
-			for (MethodObject method : superClassMethods) {
-				// This condition checks the inherited methods in the class 
-				if (method.getAccess().equals(Access.PUBLIC)|| method.getAccess().equals(Access.PROTECTED)&& !method.isStatic()|| (method.getAccess().equals(Access.NONE) && classesInPackage.contains(superClassObject.getName()))) {
-					inherdMeth.add(method);
+	private float computeMIF(SystemObject system, ClassObject classObject) {
+		List<MethodObject> methodsDeclaredINCurrentClass = classObject.getMethodList();
+		List<MethodObject> inheritedMethods = getInheritedMethods(system, classObject); 
+		
+		if(methodsDeclaredINCurrentClass.size()>0)
+		{
+			 return (float) inheritedMethods.size() / methodsDeclaredINCurrentClass.size();
+		}
+		else
+		{
+			return 0.0f;
+		}
+	}
+
+	private List<MethodObject> getInheritedMethods(SystemObject system, ClassObject classObject) 
+	{
+		List<MethodObject> allMethodsInSub = classObject.getMethodList();
+		List<MethodObject> methods = new ArrayList<MethodObject>();
+		TypeObject superCType = classObject.getSuperclass();
+		if(classObject.getSuperclass() != null)
+		{
+			ClassObject superCClass = system.getClassObject(superCType.getClassType());
+			try 
+			{ 
+				methods = superCClass.getMethodList();
+				for(int i=0; i<methods.size(); i++)
+				{
+					if(allMethodsInSub.contains(methods.get(i)))
+					{
+						methods.remove(i);
+					}
+					if((methods.get(i).getAccess().toString() != "private") && (methods.get(i).getAccess().toString() != "public") && (methods.get(i).getAccess().toString() != "protected"))
+					{
+						methods.remove(i);
+					}
+				}
+				while(superCClass != null && superCClass.getSuperclass() != null)
+				{
+					if(superCClass != null && superCClass.getSuperclass() != null)
+					{
+						superCType = superCClass.getSuperclass();
+						superCClass = system.getClassObject(superCType.getClassType());
+						try{  
+							methods.addAll(superCClass.getMethodList());
+							for(int i=0; i<methods.size(); i++)
+							{
+								if(allMethodsInSub.contains(methods.get(i)))
+								{
+									methods.remove(i);
+								}
+								if((methods.get(i).getAccess().toString() != "private") && (methods.get(i).getAccess().toString() != "public") && (methods.get(i).getAccess().toString() != "protected"))
+								{
+									methods.remove(i);
+								}
+							}
+						}
+						catch(Exception e)
+						{
+							return Collections.emptyList();
+						}
+					}
+					else
+					{
+						break;
+					}
 				}
 			}
-			superClass = superClassObject.getSuperclass();
+			catch(Exception e)
+			{
+				return Collections.emptyList();
+			}
 		}
-		
-		return inherdMeth;
+		return methods;
 	}
+	
+	
+	public String toString() {
+		StringBuilder sb = new StringBuilder();
+		for (String key : classMap.keySet()) {
+			sb.append(key).append("\t").append(classMap.get(key)).append("\n");
+		}
+		return sb.toString();
+	}	
 }
