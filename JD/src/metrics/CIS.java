@@ -2,6 +2,7 @@ package metrics;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
@@ -14,14 +15,14 @@ public class CIS
 	private Map<String, Integer> classMap = new HashMap<String, Integer>();
 	public CIS(SystemObject system) //passing an object of the current system to the constructor 
 	{
-		ArrayList<MethodObject> methods = new ArrayList<MethodObject>();
+		List<MethodObject> methods = new ArrayList<MethodObject>();
 		int num=0;
 		Set<ClassObject> classes = system.getClassObjects(); //hold all classes in the current system
 		
 		for(ClassObject classObject : classes)
 		{
 			num = 0;
-			methods = (ArrayList) classObject.getMethodList(); //get all methods in each class
+			methods = classObject.getMethodList(); //get all methods in each class
 			for(MethodObject m : methods)
 			{
 				if(m.getAccess().toString().equals("public")) //check if access modifier is public, if yes increment by 1
