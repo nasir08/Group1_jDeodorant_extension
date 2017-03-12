@@ -1,10 +1,18 @@
 package view;
 
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 
+import metrics.AIF;
+import metrics.CBO;
+import metrics.CF;
 import metrics.CIS;
+import metrics.DIT;
 import metrics.LCOM;
 import metrics.MIF;
+import metrics.NOC;
 import metrics.NOM;
 import metrics.RFC;
 import metrics.WMC;
@@ -114,26 +122,77 @@ public class MetricsAction  implements IObjectActionDelegate {
 						SystemObject system = ASTReader.getSystemObject();
 						
 						//objects initialization for metrics classes
-						LCOM lcom = new LCOM(system);
+						//LCOM lcom = new LCOM(system);
 						NOM nom = new NOM(system);
 						CIS cis = new CIS(system);
 						RFC rfc = new RFC(system);
 						WMC wmc = new WMC(system);
 						MIF mif = new MIF(system);
+						NOC noc = new NOC(system);
+						CBO cbo = new CBO(system);
+						DIT dit = new DIT(system);
+						CF cf = new CF(system);
+						AIF aif = new AIF(system);
 						
-						//metrics
-						System.out.println("*******************LCOM********************");
-						System.out.print(lcom.toString()+"\n\n");
-						System.out.println("*******************NOM********************");
-						System.out.print(nom.toString()+"\n\n");
-						System.out.println("*******************CIS********************");
-						System.out.print(cis.toString()+"\n\n");
-						System.out.println("*******************RFC********************");
-						System.out.print(rfc.toString()+"\n\n");
-						System.out.println("*******************WMC********************");
-						System.out.print(wmc.toString()+"\n\n");
-						System.out.println("*******************MIF********************");
-						System.out.print(mif.toString()+"\n\n");
+						File file = new File("C:\\Users\\nasir\\Desktop\\metrics.txt");
+						try {
+							file.createNewFile();
+							System.out.print(file.getAbsolutePath());
+						} catch (IOException e1) {
+							// TODO Auto-generated catch block
+							e1.printStackTrace();
+						}
+						
+						try {
+							FileWriter fw = new FileWriter(file,false);
+							
+							String content = "";
+							
+							//metrics
+							//content +="*******************LCOM********************";
+							//content += lcom.toString()+"\n\n";
+							
+				
+							content +="*******************CBO********************\n";
+							content +=cbo.toString()+"\n\n";
+							
+							content +="*******************CF********************\n";
+							content +=cf.toString()+"\n\n";
+							
+							content +="*******************AIF********************\n";
+							content +=aif.toString()+"\n\n";
+							
+							content +="*******************MIF********************\n";
+							content +=mif.toString()+"\n\n";
+							
+							content +="*******************DIT********************\n";
+							content +=dit.toString()+"\n\n";
+							
+							content +="*******************NOC********************\n";
+							content +=noc.toString()+"\n\n";
+							
+							content +="*******************RFC********************\n";
+							content +=rfc.toString()+"\n\n";
+							
+							content +="*******************WMC********************\n";
+							content +=wmc.toString()+"\n\n";
+							
+							content +="*******************CIS********************\n";
+							content +=cis.toString()+"\n\n";
+							
+							content +="*******************NOM********************\n";
+							content +=nom.toString()+"\n\n";
+							
+							
+							
+							fw.write(content);
+							fw.close();
+						} 
+						catch (IOException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+						
 						
 						if(selectedPackageFragmentRoot != null) {
 							// package fragment root selected

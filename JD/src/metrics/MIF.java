@@ -20,17 +20,17 @@ public class MIF {
 	{
 		Set<ClassObject> classes = system.getClassObjects();
 		classMap = new HashMap<String, Float>();
-		float wmcValue = 0.0f;
+		float mifValue = 0.0f;
 		for(ClassObject classObject : classes)
 		{
 			if(!classObject.isInterface())
 			{
-				wmcValue = computeMIF(system, classObject);
-				classMap.put(classObject.getName(), wmcValue);
+				mifValue = computeMIF(system, classObject);
+				classMap.put("", mifValue);
 			}
 			else
 			{
-				classMap.put(classObject.getName(), 0.0f);
+				classMap.put("", 0.0f);
 			}
 		}
 	}
@@ -66,7 +66,7 @@ public class MIF {
 					{
 						methods.remove(i);
 					}
-					if((methods.get(i).getAccess().toString() != "private") && (methods.get(i).getAccess().toString() != "public") && (methods.get(i).getAccess().toString() != "protected"))
+					if((methods.get(i).getAccess().toString() != "public") && (methods.get(i).getAccess().toString() != "protected") && (methods.get(i).isStatic()))
 					{
 						methods.remove(i);
 					}
@@ -85,7 +85,7 @@ public class MIF {
 								{
 									methods.remove(i);
 								}
-								if((methods.get(i).getAccess().toString() != "private") && (methods.get(i).getAccess().toString() != "public") && (methods.get(i).getAccess().toString() != "protected"))
+								if((methods.get(i).getAccess().toString() != "public") && (methods.get(i).getAccess().toString() != "protected") && (methods.get(i).isStatic()))
 								{
 									methods.remove(i);
 								}

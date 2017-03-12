@@ -16,7 +16,6 @@ import ast.inheritance.InheritanceTree;
 public class CBO {
 	private Map<String,  Integer> cboMap; //CBO Map (Class name and Coupling Value)
 	private List<String> allClassesInSystem = new ArrayList<String>();
-
 	
 	public CBO(SystemObject system) {
 		cboMap = new HashMap<String,  Integer>();
@@ -24,7 +23,6 @@ public class CBO {
 		allClassesInSystem = system.getClassNames();
 		
 		for(ClassObject classObj : classes) {
-			
 			/*Calls to compute Import, Export and Inheritance Coupling*/
 			int importCoupling = computeImportCoupling(system, classObj);
 			int exportCoupling = computeExportCoupling(system, classObj);
@@ -33,7 +31,7 @@ public class CBO {
 			
 			int cboValue = exportCoupling + inheritanceCoupling + importCoupling;
 		
-			cboMap.put(classObj.getName(), cboValue);
+			cboMap.put("", cboValue);
 		}
 	}
 	
@@ -54,7 +52,6 @@ public class CBO {
 					if(to.toString().equals(classObject.getName()))
 					{
 						counter++; 
-						//System.out.println(to.toString()+"----"+classObject.getName());
 						break;
 					}
 				}
@@ -130,7 +127,6 @@ public class CBO {
 		return childCount;
 		
 	}
-	
 	
 	@Override
 	public String toString() 

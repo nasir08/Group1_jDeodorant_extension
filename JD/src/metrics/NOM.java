@@ -16,7 +16,7 @@ public class NOM
 		
 		for(ClassObject classObject : classes)
 		{
-			classMap.put(classObject.getName(), classObject.getNumberOfMethods()); //get the name and number of methods in each class
+			classMap.put("", classObject.getNumberOfMethods()); //get the name and number of methods in each class
 		}
 		
 	}

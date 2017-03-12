@@ -27,7 +27,7 @@ public class RFC
 		for(ClassObject classObject : classes)
 		{
 			rfcValue = computeRFC(system,classObject);
-			classMap.put(classObject.getName(), rfcValue);
+			classMap.put("", rfcValue);
 		}
 	}
 	

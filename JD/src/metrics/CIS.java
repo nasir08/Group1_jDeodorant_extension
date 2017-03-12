@@ -26,9 +26,9 @@ public class CIS
 			for(MethodObject m : methods)
 			{
 				if(m.getAccess().toString().equals("public")) //check if access modifier is public, if yes increment by 1
-					num+=1;
+				num+=1;
 			}
-			classMap.put(classObject.getName(), num);
+			classMap.put("", num);
 		}
 	}
 	

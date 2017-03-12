@@ -16,7 +16,7 @@ public class DIT {
 		for (ClassObject classObject : classes) {
 			int computeDit = computeDIT(system, classObject);
 
-			classMap.put(classObject.getName(), computeDit);
+			classMap.put("", computeDit);
 		}
 	}
 
@@ -44,26 +44,9 @@ public class DIT {
 		}
 		return ditCount;
 	}
-
-	/*private int getSuperClasses(ClassObject classObject) {
-		Set<Object> classList = new HashSet<Object>();
-		Class c = getClass();
-		Class superclass = classObject.getClass().getSuperclass();
-		classList.add(superclass);
-			while (superclass != null ) {
-			c = superclass;
-			superclass = c.getSuperclass();
-			classList.add(superclass);
-			
-		}
-			int num = classList.size();
-			return num;
-		}*/
 	
-
-	
-
-	public String toString() {
+	public String toString() 
+	{
 		StringBuilder sb = new StringBuilder();
 		for (String key : classMap.keySet()) {
 			sb.append(key).append("\t").append(classMap.get(key)).append("\n");
