@@ -6,14 +6,21 @@ import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 
 import metrics.AIF;
+import metrics.ANA;
+import metrics.CAMC;
 import metrics.CBO;
 import metrics.CF;
 import metrics.CIS;
+import metrics.DCC;
 import metrics.DIT;
+import metrics.DSC;
 import metrics.LCOM;
+import metrics.MFA;
 import metrics.MIF;
 import metrics.NOC;
+import metrics.NOH;
 import metrics.NOM;
+import metrics.NOP;
 import metrics.RFC;
 import metrics.WMC;
 
@@ -133,6 +140,13 @@ public class MetricsAction  implements IObjectActionDelegate {
 						DIT dit = new DIT(system);
 						CF cf = new CF(system);
 						AIF aif = new AIF(system);
+						DCC dcc = new DCC(system);
+						DSC dsc = new DSC(system);
+						ANA ana = new ANA(system);
+						NOP nop = new NOP(system);
+						NOH noh = new NOH(system);
+						MFA mfa = new MFA(system);
+						CAMC camc = new CAMC(system);
 						
 						String fileName = "metrics.txt";
 						File file = new File("C:\\Users\\nasir\\Desktop\\"+fileName);
@@ -149,12 +163,77 @@ public class MetricsAction  implements IObjectActionDelegate {
 							
 							String content = "";
 							
+							double extendibilityValue = (0.5*ana.anaValue) - (0.5*dcc.dccValue) + (0.5*mfa.mfaValue) + (0.5*nop.nopValue);
+							double reusabilityValue = -(0.25*dcc.dccValue) + (0.25*camc.camcValue) + (0.5*cis.systemValue) + (0.5*dsc.dscValue);
+							double functionalityValue = (0.12*camc.camcValue) + (0.22*nop.nopValue) + (0.22*cis.systemValue) + (0.22*dsc.dscValue) + (0.22*noh.nohValue);
+							
 							//metrics
+							content +="-----------------External Quality Attributes------------------\n\n";
+							content +="Extendibility: "+extendibilityValue+"\n";
+							content +="Reusability: "+reusabilityValue+"\n";
+							content +="Functionality: "+functionalityValue+"\n\n";
+							
+							content +="-----------------Internal Metrics------------------\n\n";
+							
+							content +="*******************CBO********************\n";
+							content +=cbo.toString2()+"\n\n";
+							
+							content +="*******************CF********************\n";
+							content +=cf.toString()+"\n\n";
+							
+							content +="*******************AIF********************\n";
+							content +=aif.toString2()+"\n\n";
+							
+							content +="*******************MIF********************\n";
+							content +=mif.toString2()+"\n\n";
+							
+							content +="*******************DIT********************\n";
+							content +=dit.toString2()+"\n\n";
+							
+							content +="*******************NOC********************\n";
+							content +=noc.toString2()+"\n\n";
+							
+							content +="*******************RFC********************\n";
+							content +=rfc.toString2()+"\n\n";
+							
+							content +="*******************WMC********************\n";
+							content +=wmc.toString2()+"\n\n";
+							
+							content +="*******************CIS********************\n";
+							content +=cis.toString2()+"\n\n";
+							
+							content +="*******************NOM********************\n";
+							content +=nom.toString2()+"\n\n";
+							
+							content +="*******************DCC********************\n";
+							content +=dcc.toString()+"\n\n";
+							
+							content +="*******************DSC********************\n";
+							content +=dsc.toString()+"\n\n";
+							
+							content +="*******************ANA********************\n";
+							content +=ana.toString()+"\n\n";
+							
+							content +="*******************NOP********************\n";
+							content +=nop.toString()+"\n\n";
+							
+							content +="*******************NOH********************\n";
+							content +=noh.toString()+"\n\n";
+							
+							content +="*******************MFA********************\n";
+							content +=mfa.toString()+"\n\n";
+							
+							content +="*******************CAMC********************\n";
+							content +=camc.toString()+"\n\n";
+							
+							
+							
+							
 							//content +="*******************LCOM********************";
 							//content += lcom.toString()+"\n\n";
 							
 				
-							content +="*******************CBO********************\n";
+							/*content +="*******************CBO********************\n";
 							content +=cbo.toString()+"\n\n";
 							
 							content +="*******************CF********************\n";
@@ -182,7 +261,7 @@ public class MetricsAction  implements IObjectActionDelegate {
 							content +=cis.toString()+"\n\n";
 							
 							content +="*******************NOM********************\n";
-							content +=nom.toString()+"\n\n";
+							content +=nom.toString()+"\n\n";*/
 							
 							
 							
