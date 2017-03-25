@@ -13,6 +13,7 @@ import ast.decomposition.CompositeStatementObject;
 public class WMC {
 	
 	private Map<String, Integer> classMap;
+	public double systemValue;
 	
 	public WMC(SystemObject system)
 	{
@@ -22,8 +23,10 @@ public class WMC {
 		for(ClassObject classObject : classes)
 		{
 			wmcValue = computeWMC(classObject);
+			systemValue += wmcValue;
 			classMap.put(classObject.getName(), wmcValue);
 		}
+		systemValue = systemValue/classes.size();
 	}
 
 	private int computeWMC(ClassObject classObject)
@@ -68,6 +71,10 @@ public class WMC {
 			sb.append(key).append("\t").append(classMap.get(key)).append("\n");
 		}
 		return sb.toString();
+	}
+	
+	public String toString2() {
+		return "System_Value: "+systemValue;
 	}
 
 }

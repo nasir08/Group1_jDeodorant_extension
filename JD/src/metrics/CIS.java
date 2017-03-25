@@ -13,6 +13,8 @@ import ast.MethodObject;
 public class CIS 
 {
 	private Map<String, Integer> classMap = new HashMap<String, Integer>();
+	public double systemValue;
+	
 	public CIS(SystemObject system) //passing an object of the current system to the constructor 
 	{
 		List<MethodObject> methods = new ArrayList<MethodObject>();
@@ -27,9 +29,11 @@ public class CIS
 			{
 				if(m.getAccess().toString().equals("public")) //check if access modifier is public, if yes increment by 1
 				num+=1;
+				systemValue +=1;
 			}
 			classMap.put(classObject.getName(), num);
 		}
+		systemValue = systemValue/classes.size();
 	}
 	
 	@Override
@@ -41,6 +45,10 @@ public class CIS
 			sb.append(key).append("\t").append(classMap.get(key)).append("\n");
 		}
 		return sb.toString();
+	}
+	
+	public String toString2() {
+		return "System_Value: "+systemValue;
 	}
 
 }

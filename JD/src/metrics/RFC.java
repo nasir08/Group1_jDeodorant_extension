@@ -18,6 +18,7 @@ public class RFC
 	public Set<String> M;
 	public Set<String> R;
 	private int RFC;
+	public double systemValue;
 	
 	public RFC(SystemObject system)
 	{
@@ -27,8 +28,10 @@ public class RFC
 		for(ClassObject classObject : classes)
 		{
 			rfcValue = computeRFC(system,classObject);
+			systemValue += rfcValue;
 			classMap.put(classObject.getName(), rfcValue);
 		}
+		systemValue = systemValue/classes.size();
 	}
 	
 	private int computeRFC(SystemObject system, ClassObject classObject)
@@ -78,6 +81,10 @@ public class RFC
 			sb.append(key).append("\t").append(classMap.get(key)).append("\n");
 		}
 		return sb.toString();
+	}
+	
+	public String toString2() {
+		return "System_Value: "+systemValue;
 	}
 
 }

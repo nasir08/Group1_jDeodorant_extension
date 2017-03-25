@@ -1,9 +1,6 @@
 package metrics;
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Map;
 import java.util.Set;
 
 import ast.ClassObject;
@@ -12,20 +9,17 @@ import ast.SystemObject;
 
 
 public class CAMC {
-
-	
-	private Map<String, Float> camcMap;
+	public float camcValue;
 
 	public CAMC(SystemObject system){
-		camcMap = new HashMap<String, Float>();
 		Set<ClassObject> classes = system.getClassObjects();
-		float camcValue;
+		
 			
 		for(ClassObject classObject : classes){
-			camcValue = computeCAMC(system,classObject);
-			System.out.println(classObject.getName() + ": " + camcValue + "\n");
-			camcMap.put(classObject.getName(), camcValue);
+			camcValue += computeCAMC(system,classObject);
 		}
+		camcValue = camcValue/classes.size();
+		
 	}
 
 	private float computeCAMC(SystemObject system, ClassObject classObject){
@@ -69,4 +63,9 @@ public class CAMC {
 				return camc;
 			}
 	}
+	
+	public String toString() {
+		return "System_Value: "+camcValue;
+	}
+	
 }

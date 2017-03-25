@@ -2,9 +2,7 @@ package metrics;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.Set;
 
 import ast.ClassObject;
@@ -13,39 +11,41 @@ import ast.SystemObject;
 import ast.TypeObject;
 
 
-public class MIF {
-	private Map<String, Float> classMap;
-	public double systemValue;
+public class MFA {
 	
-	public MIF(SystemObject system)
+	public float mfaValue;
+	
+	public MFA(SystemObject system)
 	{
 		Set<ClassObject> classes = system.getClassObjects();
-		classMap = new HashMap<String, Float>();
-		float mifValue = 0.0f;
 		for(ClassObject classObject : classes)
 		{
 			if(!classObject.isInterface())
 			{
-				mifValue = computeMIF(system, classObject);
-				systemValue += mifValue;
-				classMap.put(classObject.getName(), mifValue);
+				mfaValue += computeMFA(system, classObject);
 			}
 			else
 			{
-				classMap.put(classObject.getName(), 0.0f);
+				mfaValue += 0;
 			}
 		}
-		systemValue = systemValue/classes.size();
+		mfaValue = mfaValue/classes.size();
 	}
 
-	private float computeMIF(SystemObject system, ClassObject classObject) {
+	private float computeMFA(SystemObject system, ClassObject classObject) {
 		List<MethodObject> methodsDeclaredINCurrentClass = classObject.getMethodList();
-		List<MethodObject> inheritedMethods = getInheritedMethods(system, classObject); 
+		List<MethodObject> inheritedMethods = getInheritedMethods(system, classObject);
 		
-		if(methodsDeclaredINCurrentClass.size()>0)
+		if(inheritedMethods.size() == 0)
 		{
-			 return (float) inheritedMethods.size() / methodsDeclaredINCurrentClass.size();
+			return 0.0f;
 		}
+		
+		else if(methodsDeclaredINCurrentClass.size() + inheritedMethods.size() > 0)
+		{
+			 return (float) inheritedMethods.size() / (methodsDeclaredINCurrentClass.size() + inheritedMethods.size());
+		}
+		
 		else
 		{
 			return 0.0f;
@@ -115,14 +115,6 @@ public class MIF {
 	
 	
 	public String toString() {
-		StringBuilder sb = new StringBuilder();
-		for (String key : classMap.keySet()) {
-			sb.append(key).append("\t").append(classMap.get(key)).append("\n");
-		}
-		return sb.toString();
-	}
-	
-	public String toString2() {
-		return "System_Value: "+systemValue;
+		return "System_Value: "+mfaValue;
 	}
 }

@@ -15,6 +15,7 @@ import ast.TypeObject;
 
 public class AIF {
 	private Map<String, Float> classMap;
+	public float systemValue;
 	
 	public AIF(SystemObject system)
 	{
@@ -26,6 +27,7 @@ public class AIF {
 			if(!classObject.isInterface())
 			{
 				aifValue = computeAIF(system, classObject);
+				systemValue += aifValue;
 				classMap.put(classObject.getName(), aifValue);
 			}
 			else
@@ -33,6 +35,7 @@ public class AIF {
 				classMap.put(classObject.getName(), 0.0f);
 			}
 		}
+		systemValue = systemValue/classes.size();
 	}
 
 	private float computeAIF(SystemObject system, ClassObject classObject) {
@@ -117,4 +120,8 @@ public class AIF {
 		}
 		return sb.toString();
 	}	
+	
+	public String toString2() {
+		return "System_Value: "+systemValue;
+	}
 }
